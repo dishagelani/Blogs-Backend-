@@ -1,13 +1,14 @@
+const Blogs = require("../controller/blogs");
+const upload = require("../middleware/uploadImage");
+
 module.exports = (app) => {
     app.get("/", (req, res) => res.status(200).send("Blog APIs !"));
-    app.get("/getAllBlogs", (req, res) => {
-        res.status(200).send("Get all blogs API");
-    });
-    app.get("/getBlogDetails", (req, res) => {
-        res.status(200).send("Get blog API");
-    });
-    app.post("/postBlog", (req, res) => {
-        console.log("req.body", req.body);
-        res.status(200).send("Post blog API");
-    });
+    app.get("/getAllBlogs", Blogs.GetAllBlogs);
+    app.get("/getBlogDetails", Blogs.GetBlogDetails);
+    app.post("/postBlog", upload.array("demo_images"), Blogs.PostBlog);
+    app.post(
+        "/uploadBlogImages",
+        upload.array("blog_images"),
+        Blogs.UploadBlogImages
+    );
 };
