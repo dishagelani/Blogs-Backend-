@@ -8,7 +8,7 @@ module.exports = (app) => {
     app.post("/postBlog", upload.array("demo_images"), Blogs.PostBlog);
     app.post(
         "/uploadBlogImages",
-        upload.array("blog_images"),
+        upload.single("blog_images"),
         Blogs.UploadBlogImages
     );
 };
